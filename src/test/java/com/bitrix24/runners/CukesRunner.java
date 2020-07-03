@@ -9,8 +9,8 @@ import org.junit.runner.RunWith;
         //plugin =
         features = "src/test/resources/features",
         glue = "com/bitrix24/stepdefinitions",
-        dryRun = false,
-        tags = "@wip1"
+        dryRun = true,
+        tags = "@service"
 
 
 )
