@@ -33,6 +33,7 @@ public class ServiceStepDef {
 
     @When("user creates the ticket")
     public void user_creates_the_ticket() {
+        servicePage.createTicket();
 
 
     }

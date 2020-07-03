@@ -1,10 +1,14 @@
 package com.bitrix24.pages;
 
+import com.bitrix24.utilities.BrowserUtils;
 import com.bitrix24.utilities.Driver;
+import io.cucumber.java.eo.Se;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
+
+import java.util.Random;
 
 public class ServicePage extends BasePage{
 
@@ -60,7 +64,47 @@ public class ServicePage extends BasePage{
     }
 
     public void createTicket() {
-        //Select
+        Random rn = new Random();
+        Select select = new Select(orderType);
+        select.selectByIndex(rn.nextInt(4));
+        BrowserUtils.waitFor(3);
+        String selectedOption = select.getFirstSelectedOption().getText();
+
+        switch (selectedOption){
+
+            case "Phone is out of order":
+                orderTitle.sendKeys("Battery Issue!!");
+                problemDescription.sendKeys("While charging Battery exploded");
+                priorityorduedate.sendKeys("Extremely Urgent ");
+                comment.sendKeys("Replace it with new one would make me happy:)");
+                break;
+
+            case "Furniture repair":
+                orderTitle.sendKeys("Chair legs broken!!");
+                problemDescription.sendKeys("While seating  it is exploded");
+                priorityorduedate.sendKeys("If you change change,If you don't change don't send it back!!! ");
+                break;
+
+            case "Cleaner service":
+                orderTitle.sendKeys("After party Living room needs to be cleaned!");
+                problemDescription.sendKeys("While partying messed it up");
+                priorityorduedate.sendKeys("Extremely Urgent ");
+                comment.sendKeys("Before my  mother come to home please make it cleaned");
+                break;
+
+            case "other":
+                orderTitle.sendKeys("Unknown error!");
+                priorityorduedate.sendKeys("Urgent");
+                break;
+        }
+        BrowserUtils.waitFor(5);
+
+        submitButton.click();
+
+
+
+
+
 
     }
 
