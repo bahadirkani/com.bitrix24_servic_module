@@ -7,6 +7,7 @@ Feature: User should make an order
     Then verify that user on the "e-Orders" page
     And user navigates to "Maintenance services"
     When user creates the ticket
+    Then ticket should be seen on my-Orders Page
 
 
 

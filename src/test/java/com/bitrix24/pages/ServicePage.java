@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.List;
 import java.util.Random;
 
 public class ServicePage extends BasePage{
@@ -48,6 +49,12 @@ public class ServicePage extends BasePage{
     @FindBy(xpath = "//input[@type='reset']")
     public WebElement resetButton;
 
+    @FindBy(xpath = "//div[@class='bx-mylist-form-data']")
+    public List<WebElement> ticketList;
+
+    @FindBy(xpath = "(//span[@class='main-buttons-item-text-title'])[2]")
+    public WebElement myOrders;
+
 
     public void loggedIn(String usertype) {
         new LoginPage().navigateToURL();
@@ -63,7 +70,7 @@ public class ServicePage extends BasePage{
 
     }
 
-    public void createTicket() {
+    public String createTicket() {
         Random rn = new Random();
         Select select = new Select(orderType);
         select.selectByIndex(rn.nextInt(4));
@@ -101,12 +108,24 @@ public class ServicePage extends BasePage{
 
         submitButton.click();
 
-
-
-
-
+        return selectedOption;
 
     }
+
+//    public boolean checkTicket(){
+//
+//       // myOrders.click();
+//
+//        boolean res=true;
+//
+//        if(!ticketList.get(0).getText().contains(createTicket())){
+//
+//            res=false;
+//        }
+//
+//        return res;
+//
+//    }
 
 
 }
