@@ -24,9 +24,11 @@ public class LoginPage extends BasePage {
     
 
     public void login(String username, String password) {
+
     usernameInput.sendKeys(ConfigurationReader.get(username));
     passwordInput.sendKeys(ConfigurationReader.get(password));
     loginButton.click();
+
     }
 
     public void loginAs(String usertype) {
