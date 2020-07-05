@@ -3,6 +3,7 @@ package com.bitrix24.pages;
 import com.bitrix24.utilities.BrowserUtils;
 import com.bitrix24.utilities.Driver;
 import io.cucumber.java.eo.Se;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -55,6 +56,9 @@ public class ServicePage extends BasePage{
     @FindBy(xpath = "(//span[@class='main-buttons-item-text-title'])[2]")
     public WebElement myOrders;
 
+    @FindBy(xpath = "(//div[@class='bx-mylist-form-data'])[1]")
+    public WebElement ordersFirstLine;
+
 
     public void loggedIn(String usertype) {
         new LoginPage().navigateToURL();
@@ -69,8 +73,9 @@ public class ServicePage extends BasePage{
         Driver.get().findElement(By.xpath("//img[@title='"+ticket+"']")).click();
 
     }
+    String expectedType;
 
-    public String createTicket() {
+    public void createTicket() {
         Random rn = new Random();
         Select select = new Select(orderType);
         select.selectByIndex(rn.nextInt(4));
@@ -84,12 +89,14 @@ public class ServicePage extends BasePage{
                 problemDescription.sendKeys("While charging Battery exploded");
                 priorityorduedate.sendKeys("Extremely Urgent ");
                 comment.sendKeys("Replace it with new one would make me happy:)");
+                expectedType = "Phone is out of order";
                 break;
 
             case "Furniture repair":
                 orderTitle.sendKeys("Chair legs broken!!");
                 problemDescription.sendKeys("While seating  it is exploded");
                 priorityorduedate.sendKeys("If you change change,If you don't change don't send it back!!! ");
+                expectedType = "Furniture repair";
                 break;
 
             case "Cleaner service":
@@ -97,18 +104,29 @@ public class ServicePage extends BasePage{
                 problemDescription.sendKeys("While partying messed it up");
                 priorityorduedate.sendKeys("Extremely Urgent ");
                 comment.sendKeys("Before my  mother come to home please make it cleaned");
+                expectedType = "Cleaner service";
                 break;
 
             case "other":
                 orderTitle.sendKeys("Unknown error!");
                 priorityorduedate.sendKeys("Urgent");
+                expectedType = "other";
                 break;
         }
         BrowserUtils.waitFor(5);
 
         submitButton.click();
 
-        return selectedOption;
+        //return selectedOption;
+
+    }
+
+    public void verifyTicked(){
+
+        String actualType = ordersFirstLine.getText().substring(24);
+        System.out.println("ordersFirstLine = " + ordersFirstLine.getText().substring(24));
+
+        Assert.assertEquals(expectedType,actualType);
 
     }
 
