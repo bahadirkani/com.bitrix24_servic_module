@@ -130,20 +130,6 @@ public class ServicePage extends BasePage{
 
     }
 
-//    public boolean checkTicket(){
-//
-//       // myOrders.click();
-//
-//        boolean res=true;
-//
-//        if(!ticketList.get(0).getText().contains(createTicket())){
-//
-//            res=false;
-//        }
-//
-//        return res;
-//
-//    }
 
 
 }
