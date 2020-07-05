@@ -42,7 +42,7 @@ public class ServiceStepDef {
     @Then("ticket should be seen on my-Orders Page")
     public void ticketShouldBeSeenOnMyOrdersPage() {
 
-        Assert.assertTrue(servicePage.ticketList.get(0).contains(servicePage.createTicket()));
+        Assert.assertTrue(servicePage.ticketList.get(0).getText().contains(servicePage.createTicket() ));
 
 
 
